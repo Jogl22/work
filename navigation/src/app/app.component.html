@@ -1,0 +1,23 @@
+<mat-toolbar class="header">  
+  <mat-toolbar-row>
+    <button mat-icon-button (mouseenter)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Playground</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container class="content">
+    <mat-sidenav #sidenav class="sidenav">
+      <mat-nav-list>
+        <a mat-list-item routerLink="." (click)="sidenav.toggle()">Navigation 1</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <p>Content</p>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+<mat-toolbar class="footer">Footer</mat-toolbar>
