@@ -3,6 +3,8 @@ import { MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, Mat
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
+import { TeaTimerSharedModule } from 'projects/tea-timer/src/app/app.module';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { AppComponent } from './app.component';
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    AppRoutingModule,
+    TeaTimerSharedModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

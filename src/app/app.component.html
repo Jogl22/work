@@ -10,12 +10,12 @@
 <mat-sidenav-container class="content">
     <mat-sidenav #sidenav class="sidenav">
       <mat-nav-list>
-        <a mat-list-item routerLink="." (click)="sidenav.toggle()">Navigation 1</a>
+        <a mat-list-item routerLink="/tea-timer" (click)="sidenav.toggle()">Tea Timer</a>
       </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <p>Content</p>
+      <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>
 
