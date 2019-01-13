@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TeaTimerSharedModule } from 'projects/tea-timer/src/app/app.module';
-import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {

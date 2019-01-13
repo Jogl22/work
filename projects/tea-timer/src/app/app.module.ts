@@ -1,20 +1,24 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { MatSidenavModule } from '@angular/material';
+import { AppComponent, MeineNeueKomponente } from './app.component';
+import { SharedModule } from 'src/shared/shared.module';
 
 
 const providers = []
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MeineNeueKomponente
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatSidenavModule
+    SharedModule
+  ],
+  entryComponents: [
+    MeineNeueKomponente
   ],
   providers: [providers],
   bootstrap: [AppComponent]
