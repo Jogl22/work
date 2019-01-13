@@ -1,0 +1,35 @@
+.timerCard {
+    width: 85%;
+    margin-bottom: 5%;
+}
+
+.timerCardHeader {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+.timerHeaderIcon {
+    font-size: 40px;
+    padding-top: 3px;
+}
+
+.countdown {
+    color: red;
+    position: relative;
+    left: 25%;
+    font-size: 30px;
+}
+
+.timerCardContent {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.timerCardContent_button {
+    padding-right: 1%;
+}
+
+.buttonContainer {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}

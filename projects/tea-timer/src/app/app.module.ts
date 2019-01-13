@@ -1,8 +1,9 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent, MeineNeueKomponente } from './app.component';
+import { AppComponent } from './app.component';
 import { SharedModule } from 'src/shared/shared.module';
+import { TimerComponent } from './timer/timer.component';
 
 
 const providers = []
@@ -10,7 +11,8 @@ const providers = []
 @NgModule({
   declarations: [
     AppComponent,
-    MeineNeueKomponente
+    TimerComponent,
+    TimerComponent
   ],
   imports: [
     BrowserModule,
@@ -18,7 +20,7 @@ const providers = []
     SharedModule
   ],
   entryComponents: [
-    MeineNeueKomponente
+    TimerComponent
   ],
   providers: [providers],
   bootstrap: [AppComponent]

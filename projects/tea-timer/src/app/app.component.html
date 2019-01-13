@@ -2,11 +2,13 @@
   Welcome to {{ title }}!
 </h1>
 
-<button mat-icon-button (click)="addComponent()">
+<button mat-icon-button (click)="addTimer()">
   <mat-icon>add</mat-icon>
 </button>
 
-<template #myTemplate></template>
+<div class="gridContainer">
+  <template #timerComponentTemplate></template>
+</div>
 
 <!-- <router-outlet></router-outlet> -->
 

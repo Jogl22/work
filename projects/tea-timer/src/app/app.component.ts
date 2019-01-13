@@ -1,13 +1,14 @@
-import { Component, ComponentFactoryResolver, ViewChild, ViewContainerRef, ComponentFactory, ComponentRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, ComponentRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { TimerComponent } from './timer/timer.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'tea-timer';
-  @ViewChild("myTemplate", { read: ViewContainerRef }) container;
+  @ViewChild("timerComponentTemplate", { read: ViewContainerRef }) container;
 
   componentIndex: number = 0;
   componentsReferences: ComponentRef<any>[] = [];
@@ -20,8 +21,8 @@ export class AppComponent {
     console.log('tea-timer activ');
   }
 
-  addComponent() {
-    const factory = this.resolver.resolveComponentFactory(MeineNeueKomponente);
+  addTimer() {
+    const factory = this.resolver.resolveComponentFactory(TimerComponent);
     let componentRef = this.container.createComponent(factory);
     let currentComponent = componentRef.instance;
 
@@ -31,12 +32,12 @@ export class AppComponent {
     this.componentsReferences.push(componentRef);
   }
 
-  removeComponent(index) {
+  removeTimer(index) {
     if (this.container.length < 1)
       return;
 
     let componentRef = this.componentsReferences.filter(x => x.instance.index == index)[0];
-    let component: MeineNeueKomponente = <MeineNeueKomponente>componentRef.instance;
+    let component: TimerComponent = <TimerComponent>componentRef.instance;
 
     let vcrIndex: number = this.container.indexOf(componentRef)
 
@@ -45,29 +46,3 @@ export class AppComponent {
     this.componentsReferences = this.componentsReferences.filter(x => x.instance.index !== index);
   }
 }
-
-@Component({
-  selector: 'meine',
-  template: `
-  <span>Hallo</span>
-  <button mat-icon-button (click)="removeComponent(index)">
-    <mat-icon>remove</mat-icon>
-  </button>
-  `
-})
-export class MeineNeueKomponente {
-  public index: number;
-  public selfRef: MeineNeueKomponente;
-
-  //interface for Parent-Child interaction
-  public compInteraction: myinterface;
-
-  removeComponent(index) {
-    this.compInteraction.removeComponent(index)
-  }
-}
-
-export interface myinterface {
-  removeComponent(index: number);
-}
-
