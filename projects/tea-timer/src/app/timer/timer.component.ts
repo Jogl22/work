@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
+import { PushNotificationService } from 'src/shared/push-notification.service';
 
 @Component({
   selector: 'app-timer',
@@ -14,14 +15,15 @@ export class TimerComponent implements OnInit, OnDestroy {
   public compInteraction: myinterface;
 
   timeInMinutes = 1;
-  items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0.05];
   countdownInSeconds = this.timeInMinutes * 60;
   timerStatus: TimerStatus = TimerStatus.DEFAULT;
 
   subscription: Subscription;
 
-
-  constructor() { }
+  constructor(private pushNotificationService: PushNotificationService) {
+      this.pushNotificationService.requestPermission();
+  }
 
   ngOnInit() {
   }
@@ -44,9 +46,10 @@ export class TimerComponent implements OnInit, OnDestroy {
     this.subscription = source.subscribe(interval => {
       const countdownSeconds = timeInSeconds - interval;
       if (countdownSeconds === 0) {
-        console.log('timer ended ....');
         this.subscription.unsubscribe();
+        this.sendPushNotifcation();
         this.countdownInSeconds = timeInSeconds;
+        this.timerStatus = TimerStatus.DEFAULT;
       } else {
         this.countdownInSeconds = countdownSeconds;
       }
@@ -73,6 +76,15 @@ export class TimerComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
     this.countdownInSeconds = this.timeInMinutes * 60;
   }
+
+  sendPushNotifcation() {
+    let data: Array<any>= [];
+    data.push({
+        'title': 'Tee ist fertig',
+        'alertContent': 'Beutel raus !'
+    });
+    this.pushNotificationService.generateNotification(data, 'tea.png');
+}
 
   removeTimer(index) {
     this.compInteraction.removeTimer(index);
