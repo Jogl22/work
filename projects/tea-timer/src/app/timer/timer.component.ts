@@ -35,7 +35,7 @@ export class TimerComponent implements OnInit, OnDestroy {
     this.countdownInSeconds = timeInMinutes * 60;
   }
 
-  startTimer(timeInMinutes) {
+  startCountdown(timeInMinutes) {
     this.timerStatus = TimerStatus.STARTED;
 
     const timeInSeconds = timeInMinutes * 60;
@@ -54,20 +54,20 @@ export class TimerComponent implements OnInit, OnDestroy {
     });
   }
 
-  pauseTimer() {
+  pauseCountdown() {
     this.timerStatus = TimerStatus.PAUSED;
 
     this.subscription.unsubscribe();
   }
 
-  continueTimer(currentTimeInSecond) {
+  continueCountdown(currentTimeInSecond) {
     this.timerStatus = TimerStatus.STARTED;
     const currentTimeInMinutes = currentTimeInSecond / 60;
 
     this.startTimer(currentTimeInMinutes);
   }
 
-  clearTimer() {
+  clearCountdown() {
     this.timerStatus = TimerStatus.DEFAULT;
 
     this.subscription.unsubscribe();

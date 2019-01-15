@@ -15,19 +15,19 @@
   </mat-card-content>
   <mat-card-actions>
     <div class="buttonContainer">
-      <button mat-icon-button (click)="startTimer(timeInMinutes)">
+      <button mat-icon-button (click)="startCountdown(timeInMinutes)">
         Start
         <mat-icon>timelapse</mat-icon>
       </button>
-      <button mat-icon-button (click)="pauseTimer()" [disabled]="timerStatus === 'DEFAULT'" *ngIf="timerStatus === 'STARTED' || timerStatus === 'DEFAULT'">
+      <button mat-icon-button (click)="pauseCountdown()" [disabled]="timerStatus === 'DEFAULT'" *ngIf="timerStatus === 'STARTED' || timerStatus === 'DEFAULT'">
         Pause
       <mat-icon>timer_off</mat-icon>
       </button>
-      <button mat-icon-button (click)="continueTimer(countdownInSeconds)" *ngIf="timerStatus === 'PAUSED'">
+      <button mat-icon-button (click)="continueCountdown(countdownInSeconds)" *ngIf="timerStatus === 'PAUSED'">
         Continue
       <mat-icon>timer_off</mat-icon>
       </button>
-      <button mat-icon-button (click)="clearTimer()" [disabled]="timerStatus === 'DEFAULT'" >
+      <button mat-icon-button (click)="clearCountdown()" [disabled]="timerStatus === 'DEFAULT'" >
         Clear
       <mat-icon>clear</mat-icon>
       </button>
