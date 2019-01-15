@@ -3,7 +3,7 @@
     <mat-icon mat-card-avatar class="timerHeaderIcon">timer</mat-icon>
     <mat-card-title>Starting Timer for</mat-card-title>
     <mat-card-subtitle>{{ timeInMinutes }} min</mat-card-subtitle>
-    <span class="countdown">{{ countdown }}</span>
+    <span class="countdown">{{ countdownInSeconds | countdown }}</span>
   </mat-card-header>
   <mat-card-content>
     <span>Choose new Timer: </span>
@@ -19,11 +19,15 @@
         Start
         <mat-icon>timelapse</mat-icon>
       </button>
-      <button mat-icon-button (click)="stopTimer()">
-        Stop
+      <button mat-icon-button (click)="pauseTimer()" [disabled]="timerStatus === 'DEFAULT'" *ngIf="timerStatus === 'STARTED' || timerStatus === 'DEFAULT'">
+        Pause
       <mat-icon>timer_off</mat-icon>
       </button>
-      <button mat-icon-button (click)="clearTimer()">
+      <button mat-icon-button (click)="continueTimer(countdownInSeconds)" *ngIf="timerStatus === 'PAUSED'">
+        Continue
+      <mat-icon>timer_off</mat-icon>
+      </button>
+      <button mat-icon-button (click)="clearTimer()" [disabled]="timerStatus === 'DEFAULT'" >
         Clear
       <mat-icon>clear</mat-icon>
       </button>

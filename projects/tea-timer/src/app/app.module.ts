@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from 'src/shared/shared.module';
 import { TimerComponent } from './timer/timer.component';
+import { CountdownPipe } from './countdown.pipe';
 
 
 const providers = []
@@ -12,7 +13,8 @@ const providers = []
   declarations: [
     AppComponent,
     TimerComponent,
-    TimerComponent
+    TimerComponent,
+    CountdownPipe
   ],
   imports: [
     BrowserModule,

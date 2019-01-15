@@ -15,12 +15,11 @@ export class TimerComponent implements OnInit, OnDestroy {
 
   timeInMinutes = 1;
   items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  countdownInSeconds = this.timeInMinutes * 60;
+  timerStatus: TimerStatus = TimerStatus.DEFAULT;
 
   subscription: Subscription;
 
-  testTime: number;
-
-  countdown = this.timeInMinutes.toString().padStart(2, '0') + ':' + (0).toString().padStart(2, '0');
 
   constructor() { }
 
@@ -33,36 +32,46 @@ export class TimerComponent implements OnInit, OnDestroy {
 
   changeTime(timeInMinutes) {
     this.timeInMinutes = timeInMinutes;
-    this.countdown = this.timeInMinutes.toString().padStart(2, '0') + ':' + (0).toString().padStart(2, '0');
+    this.countdownInSeconds = timeInMinutes * 60;
   }
 
   startTimer(timeInMinutes) {
-    console.log('timer started ...');
+    this.timerStatus = TimerStatus.STARTED;
+
     const timeInSeconds = timeInMinutes * 60;
     const source = interval(1000);
 
-    this.subscription = source.subscribe(val => {
-      if ((timeInSeconds - val) === 55) {
+    this.subscription = source.subscribe(interval => {
+      const countdownSeconds = timeInSeconds - interval;
+      if (countdownSeconds === 0) {
+        console.log('timer ended ....');
         this.subscription.unsubscribe();
+        this.countdownInSeconds = timeInSeconds;
+      } else {
+        this.countdownInSeconds = countdownSeconds;
       }
 
-      this.testTime = timeInSeconds - val;
-      console.log(this.testTime);
-
-      const minutes: number = Math.floor(this.testTime / 60);
-      console.log(minutes.toString().padStart(2, '0') + ':' +
-           (this.testTime - minutes * 60).toString().padStart(2, '0'));
-      this.countdown = minutes.toString().padStart(2, '0') + ':' + (this.testTime - minutes * 60).toString().padStart(2, '0');
     });
   }
 
-  stopTimer() {
+  pauseTimer() {
+    this.timerStatus = TimerStatus.PAUSED;
+
     this.subscription.unsubscribe();
   }
 
+  continueTimer(currentTimeInSecond) {
+    this.timerStatus = TimerStatus.STARTED;
+    const currentTimeInMinutes = currentTimeInSecond / 60;
+
+    this.startTimer(currentTimeInMinutes);
+  }
+
   clearTimer() {
+    this.timerStatus = TimerStatus.DEFAULT;
+
     this.subscription.unsubscribe();
-    this.countdown = this.timeInMinutes.toString().padStart(2, '0') + ':' + (0).toString().padStart(2, '0');
+    this.countdownInSeconds = this.timeInMinutes * 60;
   }
 
   removeTimer(index) {
@@ -72,4 +81,10 @@ export class TimerComponent implements OnInit, OnDestroy {
 
 export interface myinterface {
   removeTimer(index: number);
+}
+
+export enum TimerStatus {
+  DEFAULT = 'DEFAULT',
+  STARTED = 'STARTED',
+  PAUSED = 'PAUSED'
 }
