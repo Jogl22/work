@@ -64,7 +64,7 @@ export class TimerComponent implements OnInit, OnDestroy {
     this.timerStatus = TimerStatus.STARTED;
     const currentTimeInMinutes = currentTimeInSecond / 60;
 
-    this.startTimer(currentTimeInMinutes);
+    this.startCountdown(currentTimeInMinutes);
   }
 
   clearCountdown() {
