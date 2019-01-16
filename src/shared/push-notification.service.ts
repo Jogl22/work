@@ -32,7 +32,7 @@ export class PushNotificationService {
               console.log('The user hasn not granted you permission to send push notifications');
               obs.complete();
           }
-          let _notify = new Notification(title, options);
+          const _notify = new Notification(title, options);
           _notify.onshow = (e) => {
               return obs.next({
                   notification: _notify,
@@ -41,6 +41,7 @@ export class PushNotificationService {
           };
           _notify.onclick = (e) => {
               window.focus();
+              _notify.close();
               return obs.next({
                   notification: _notify,
                   event: e
@@ -58,14 +59,14 @@ export class PushNotificationService {
       });
   }
   generateNotification(source: Array <any>, imageName: string): void {
-      let self = this;
+      const self = this;
       source.forEach((item) => {
           const options = {
               body: item.alertContent,
-              icon: '../images/' + imageName
+              icon: 'assets/images/' + imageName
           };
           const notify = self.create(item.title, options).subscribe();
-      })
+      });
   }
 }
 
