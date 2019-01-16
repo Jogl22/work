@@ -21,7 +21,7 @@ export class PushNotificationService {
           });
       }
   }
-  create(title: string, options?: PushNotification): any {
+  create(title: string, options?: PushNotificationOptions): any {
       const self = this;
       return new Observable((obs) => {
           if (!('Notification' in window)) {
@@ -61,9 +61,10 @@ export class PushNotificationService {
   generateNotification(source: Array <any>, imageName: string): void {
       const self = this;
       source.forEach((item) => {
-          const options = {
+          const options: PushNotificationOptions = {
               body: item.alertContent,
-              icon: 'assets/images/' + imageName
+              icon: 'assets/images/' + imageName,
+              requireInteraction: true
           };
           const notify = self.create(item.title, options).subscribe();
       });
@@ -71,7 +72,7 @@ export class PushNotificationService {
 }
 
 export declare type Permission = 'denied' | 'granted' | 'default';
-export interface PushNotification {
+export interface PushNotificationOptions {
     body?: string;
     icon?: string;
     tag?: string;
@@ -84,4 +85,5 @@ export interface PushNotification {
     dir?: 'auto' | 'ltr' | 'rtl';
     lang?: string;
     vibrate?: number[];
+    requireInteraction?: boolean;
 }
